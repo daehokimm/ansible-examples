@@ -1,0 +1,13 @@
+plugin: aws_ec2
+use_extra_vars: yes
+regions:
+  - ap-northeast-2
+keyed_groups:
+  - key: tags['MetricAgent']
+    prefix: metric_agent
+filters:
+  instance-state-name: running
+  tag:Project: ansible-example
+  tag:CollectMetric: true
+compose:
+  ansible_host: private_ip_address

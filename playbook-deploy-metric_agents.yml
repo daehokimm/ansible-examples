@@ -1,0 +1,31 @@
+---
+- name: deploy container
+  hosts: "metric_agent_{{ (metric_agent_name + '_' + metric_agent_curr_version) | replace('-','_') | replace('.','_') }}"
+  become: true
+  vars_files:
+    - vars-metric_agents.yml
+    - vars-common.yml
+  tasks:
+    - name: Copy docker-compose.yml
+      copy:
+        src: "files/metric_agent/{{ metric_agent_name }}/docker-compose.yml"
+        dest: "{{ metric_agent_docker_compose_dir }}"
+
+    - name: Copy config files
+      copy:
+        src: "files/metric_agent/{[ metric_agent_name }}/conf"
+        dest: "{{ metric_agent_config_dir }}"
+
+    - name: Run docker-compose up
+      community.docker.docker_compose:
+        project_src: "{{ metric_agent_docker_compose_dir }}"
+      register: runOutput
+
+    - name: Print output for running docker-compose
+      debug:
+        var: runOutput
+
+    - name: Check is the container deployed?
+      assert:
+        that:
+          - "{{ metric_agent_name | replace('-','_') }}.{{ metric_agent_name | replace('-','_') }}.state.running"

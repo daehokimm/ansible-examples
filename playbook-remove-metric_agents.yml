@@ -1,0 +1,21 @@
+---
+- name: deploy container
+  hosts: "metric_agent_{{ (metric_agent_name + '_' + metric_agent_curr_version) | replace('-','_') | replace('.','_') }}"
+  become: true
+  vars_files:
+    - vars-metric_agents.yml
+    - vars-common.yml
+  tasks:
+    - name: Check the container
+      docker_container_info:
+        name: "{{ metric_agent_name }}"
+      register: containerCheckResult
+
+    - name: Does conatainer exist?
+      debug:
+        msg: "The {{ metric_agent_name }} container {{ 'exists' if containerCheckResult.exists else 'does not exist' }}"
+
+    - name: remove container
+      docker_container:
+        name: "{{ metric_agent_name }}"
+        state: absent

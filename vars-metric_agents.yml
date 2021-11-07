@@ -1,0 +1,6 @@
+---
+metric_agent_name: telegraf
+metric_agent_curr_version: 1.20.3
+metric_agent_next_version: 1.20.3
+metric_agent_docker_compose_dir: /var/agents/metrics/
+metric_agent_config_dir: /var/agents/metrics/config/
