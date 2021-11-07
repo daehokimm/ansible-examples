@@ -1,2 +1,2 @@
 ---
-ansible_ssh_private_key_file: telegraf
+ansible_ssh_private_key_file: plz.change.your.pem
