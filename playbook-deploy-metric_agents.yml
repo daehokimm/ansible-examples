@@ -13,7 +13,7 @@
 
     - name: Copy config files
       copy:
-        src: "files/metric_agent/{[ metric_agent_name }}/conf"
+        src: "files/metric_agent/{{ metric_agent_name }}/conf/"
         dest: "{{ metric_agent_config_dir }}"
 
     - name: Run docker-compose up
