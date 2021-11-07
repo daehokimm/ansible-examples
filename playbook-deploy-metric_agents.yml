@@ -24,8 +24,3 @@
     - name: Print output for running docker-compose
       debug:
         var: runOutput
-
-    - name: Check is the container deployed?
-      assert:
-        that:
-          - "{{ metric_agent_name | replace('-','_') }}.{{ metric_agent_name | replace('-','_') }}.state.running"
