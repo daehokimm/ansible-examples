@@ -8,4 +8,4 @@ check-container:
 	$(AP) playbook-check-metric_agents.yml -i inventory-metric_agents-aws_ec2.yml
 
 remove-container:
-	$(AP) playbook-check-metric_agents.yml -i inventory-metric_agents-aws_ec2.yml
+	$(AP) playbook-remove-metric_agents.yml -i inventory-metric_agents-aws_ec2.yml
